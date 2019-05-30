@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <button onclick="toPNG()">PNG</button>
+    <button onclick="toJPG()">JPG</button>
+    <button onclick="toTag()">Show The Image</button>
+    <br />
+    <img src="" id="previewImg" alt="" />
+
+    <script>
+      const { nativeImage, remote } = require('electron');
+      const fs = require('fs');
+
+      let dogImage = nativeImage.createFromPath(`${__dirname}/dog.jpg`);
+
+      const toPNG = e => {
+        let pngDogImage = dogImage.toPNG();
+        saveToDesktop(pngDogImage, 'png');
+      };
+
+      const toJPG = e => {
+        let jpgDogImage = dogImage.toJPEG(100);
+        saveToDesktop(jpgDogImage, 'jpg');
+      };
+
+      const saveToDesktop = (data, ext) => {
+        let desktopPath = remote.app.getPath('desktop'); // getting Desktop path
+        console.log(desktopPath);
+        fs.writeFile(`${desktopPath}/dogimages.${ext}`, data, err => {
+          console.log(err);
+        });
+      };
+
+      const toTag = e => {
+        let sizeVal = dogImage.getSize();
+
+        let dogImageURL = dogImage
+          .resize({ width: sizeVal.width / 2, height: sizeVal.height / 2 })
+          .toDataURL();
+        document.getElementById('previewImg').src = dogImageURL;
+      };
+
+      const previewImg = () => {};
+    </script>
+  </body>
+</html>

@@ -47,3 +47,7 @@ Shared API's :
 - NativeImage
 
 ---
+
+Note: Since our renderer windows are chromium based, we can take full advantage of HTML-5 fetaures
+
+---

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div>
+      copy this text from here
+    </div>
+    <button onclick="makeUpperCase()">Make Clipboard UpperCase</button>
+
+    <div style="margin-top: 2rem">
+      <span>Paste your text here : </span><br />
+      <textarea cols="30" rows="10"></textarea>
+    </div>
+    <hr />
+    <button onclick="showImage()">Show Clipboard Image</button>
+    <br />
+    <img id="clipboardImg" />
+
+    <script>
+      const { clipboard } = require('electron');
+      console.log(clipboard.readText());
+
+      const makeUpperCase = () => {
+        clipboard.writeText(clipboard.readText().toUpperCase());
+      };
+
+      const showImage = () => {
+        let image = clipboard.readImage();
+        document.getElementById('clipboardImg').src = image.toDataURL();
+      };
+    </script>
+  </body>
+</html>

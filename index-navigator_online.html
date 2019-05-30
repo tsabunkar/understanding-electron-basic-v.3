@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h3>Add is : <u id="statusVal"></u></h3>
+
+    <script>
+      const setStatusValue = status => {
+        const statusNode = document.getElementById('statusVal');
+        statusNode.innerText = status === true ? 'online' : 'offline';
+      };
+
+      setStatusValue(navigator.onLine);
+
+      window.addEventListener('online', e => {
+        console.log('App is online');
+        setStatusValue(true);
+      });
+      window.addEventListener('offline', e => {
+        console.log('App is offline');
+        setStatusValue(false);
+      });
+    </script>
+  </body>
+</html>
