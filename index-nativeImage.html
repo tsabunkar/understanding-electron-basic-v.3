@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="" id="logoImg" alt="">
+
+  <script>
+
+    const { nativeImage } = require('electron');
+    const fs = require('fs')
+
+    let logo = nativeImage.createFromPath('D://Images/Instagram/IMG_20171224_182234_123.jpg');
+    console.log(logo);
+    console.log('Image size is ', logo.getSize());
+
+    document.getElementById('logoImg').src =
+      logo.resize({ width: logo.getSize().width / 2, height: logo.getSize().height / 3 })
+        .toDataURL();
+
+
+    fs.writeFile('D://Images/Instagram/IMG_20171224_182234_123.jpg', logo.toJPEG(100), (result) => {
+      console.log(result);
+    })
+  </script>
+</body>
+
+</html>

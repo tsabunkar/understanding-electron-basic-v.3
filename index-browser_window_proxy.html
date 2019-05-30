@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <style>
+    a {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<h1>
+  <!-- <a href="https://google.com">Google</a> -->
+  <a onclick="open_window()">Open Google</a>
+  <br>
+  <a onclick="close_window()">Close Google</a>
+  <br>
+  <a onclick="alert_window('An alert intitiated by main window')">Alert</a>
+  <br>
+  <a id="github_link">Open Github</a>
+
+</h1>
+
+<body>
+
+  <script>
+
+    let win;
+
+    const open_window = () => {
+      win = window.open('https://google.com')
+    }
+    const close_window = () => {
+      win.close();
+      console.log('closing child window');
+    }
+
+    const alert_window = (message) => {
+      console.log(message);
+      win.eval(`alert('${message}')`);
+    }
+
+    document.getElementById('github_link').addEventListener('click', () => {
+      win = window.open('https://github.com/tsabunkar', 'Github Window', 'resizable=no,width=950')
+    }) 
+  </script>
+</body>
+
+</html>

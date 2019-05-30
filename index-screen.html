@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+
+<body>
+
+  Click inide this box
+  <div onclick="showClickPoints()" style="width: 200px;height: 200px; border:1px black solid">
+
+  </div>
+
+  <script>
+    const electron = require('electron');
+
+    console.log('My Mointors details are : ');
+    console.log(electron.screen.getAllDisplays());
+    const displays = electron.screen.getAllDisplays();
+
+    for (let index = 0; index < displays.length; index++) {
+      // const element = displays[index];
+      console.log('Size of the monitor', displays[index].size.width, displays[index].size.height);
+      console.log('Mointor postions', displays[index].bounds.x, displays[index].bounds.y);
+
+    }
+
+    electron.screen.on('display-metrics-changed', (e, display, changeMetrics) => {
+      console.log(display);
+      console.log(changeMetrics);
+    })
+
+    function showClickPoints() {
+      console.log(electron.screen.getCursorScreenPoint());
+    }
+
+  </script>
+</body>
+
+</html>

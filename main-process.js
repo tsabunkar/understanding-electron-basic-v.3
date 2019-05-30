@@ -5,6 +5,11 @@ const { app, BrowserWindow } = require('electron');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+console.log('Process Type ' + process.type);
+console.log('Process Version ' + process.versions.electron);
+console.log('Process Chromium version ' + process.versions.chrome);
+console.log('Process Resource Path ' + process.resourcesPath);
+
 function createWindow(event) {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -19,7 +24,12 @@ function createWindow(event) {
   mainWindow.loadFile('index.html');
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
+
+  mainWindow.webContents.on('crashed', () => {
+    console.log('Main Window Renderer Process Crashed. Reloading');
+    // mainWindow.reload(); // Recreates the crash render process
+  });
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

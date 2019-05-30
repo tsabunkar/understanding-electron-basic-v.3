@@ -38,3 +38,12 @@ Session is resposnible for cookies, local storage and web sql, etc
 accelerator- Are global shortcuts key boards button which user can press -> ctrl + A, shift + Z, etc
 
 ---
+
+Shared API's :
+
+- process
+- Screen
+- Shell
+- NativeImage
+
+---

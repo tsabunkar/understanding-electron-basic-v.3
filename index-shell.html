@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <style>
+    #fileBox {
+      background-color: greenyellow;
+    }
+
+    #trashBox {
+      background-color: red;
+      margin-top: 3rem;
+    }
+
+    .box {
+      border: 5px dashed black;
+      padding: 3rem 4rem;
+      /* float: left; */
+      width: 20%;
+      height: 20%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box" id="fileBox">
+    <h3>Drop File Here</h3>
+    <b>Check the preview </b>
+  </div>
+
+  <div class="box" id="trashBox">
+    <h3>Trash your file </h3>
+    <b>(move it to recycle bin)</b>
+  </div>
+
+  <script>
+
+    const { shell } = require('electron');
+
+    // shell.openExternal('https://github.com')
+
+    const fileBox = document.getElementById('fileBox');
+    const trashBox = document.getElementById('trashBox');
+
+
+    fileBox.ondragover = fileBox.ondragend = fileBox.ondragleave = () => {
+      return false
+    }
+
+    trashBox.ondragover = trashBox.ondragend = trashBox.ondragleave = () => {
+      return false
+    }
+
+    let myFile = null;
+
+    fileBox.ondrop = (e) => {
+      console.log(e.dataTransfer.files);
+      console.log('File path ', e.dataTransfer.files[0].path);
+
+      myFile = e.dataTransfer.files[0].path
+      shell.openItem(myFile)
+      return false;
+    }
+
+    trashBox.ondrop = (e) => {
+      myFile = e.dataTransfer.files[0].path
+      shell.moveItemToTrash(myFile)
+      return false;
+    }
+  </script>
+
+</body>
+
+</html>
