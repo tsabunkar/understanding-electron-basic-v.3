@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      const { remote } = require('electron');
+      const self = remote.getCurrentWindow();
+
+      let progress = 0.01;
+      let progressInterval = setInterval(() => {
+        self.setProgressBar(progress);
+
+        if (progress <= 1) {
+          progress += 0.01;
+        } else {
+          self.setProgressBar(-1); // shuld not be zero, can be any -ve value
+          clearInterval(progressInterval);
+        }
+      }, 75);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <textarea id="inputId" cols="30" rows="10"></textarea>
+    <br />
+    <button onclick="submit()" type="button">Save Text To Desktop</button>
+    <script>
+      function submit() {
+        console.log(document.getElementById('inputId').value);
+        window.writeToMyFile(document.getElementById('inputId').value);
+      }
+
+      console.log(window.versions.node);
+      console.log(window.versions.electron);
+    </script>
+  </body>
+</html>
